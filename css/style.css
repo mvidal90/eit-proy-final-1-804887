@@ -1,0 +1,8 @@
+
+footer {
+    min-height: 2.5rem;
+    background-color: var(--bs-indigo);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
