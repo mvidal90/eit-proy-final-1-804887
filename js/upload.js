@@ -31,17 +31,24 @@ const validateInt = num => Number.isInteger(num)
 
 
 const saveGame = game => {
-    const initialValue = localStorage.getItem("games")
-    if (initialValue) {
-        let values = JSON.parse(initialValue)
-        values.push(game)
-        const newValStg = JSON.stringify(values)
-        console.log(newValStg)
+    const form = document.getElementById("uploadForm")
+    const initialValue = localStorage.getItem("games") || JSON.stringify([])
+    const values = JSON.parse(initialValue)
+    // const id = Math.floor(Math.random() * 9999)
+    const gameWithId = {
+        // id,
+        id: values.length + 1,
+        ...game
+    }
+    if (values.length) {
+        const newValues = [ ...values, gameWithId ]
+        const newValStg = JSON.stringify(newValues)
         localStorage.setItem("games", newValStg)
     } else {
-        const initialGames = JSON.stringify([game])
+        const initialGames = JSON.stringify([gameWithId])
         localStorage.setItem("games", initialGames)
     }
+    form.reset()
     alert("El juego ha sido guardado correctamente")
 }
 
